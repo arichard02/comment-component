@@ -16,38 +16,11 @@
   margin-left: 20px;
   margin-right: 20px;
   width: 300px;
-  
 }
-
-title {
-  text-align: center;
-}
-
- /* .card {
-  background-color: aqua;
-  border-radius: 20px;
-  width: 300px;
-  height: 150px;
-  padding: 20px;
-  margin: 20px;
-  text-align: auto; 
-
-} */
 
 div {
-  /* text-align: center;
-  background-color: teal;
-  border-radius: 20px black 1px; */
-  /* display:inline-block ; */
-  width: 200px;
+  
   text-align: center;
-  /* border: solid black 1px; */
-  padding-left: 20px;
+ 
 }
 
-button {
-  background-color: blue;
-  width: 100px;
-  height: 30px;
-  border-radius: dotted;
-}
