@@ -15,9 +15,12 @@
     > -->
 
       <!-- full name -->
-      <img src="https://cdn.pixabay.com/photo/2013/07/21/13/00/rose-165819__480.jpg" alt="blue rose" />
+      <img
+        src="https://cdn.pixabay.com/photo/2013/07/21/13/00/rose-165819__480.jpg"
+        alt="blue rose"
+      />
       <div class="row">
-        <label class="desc" for="full_name">*Full Name</label>
+        <label class="desc" for="full_name"><strong>*Full Name</strong></label>
         <div>
           <input
             id="full_name"
@@ -34,7 +37,7 @@
       </div>
       <!-- Email -->
       <div class="row">
-        <label class="desc" for="my_email"> *Email </label>
+        <label class="desc" for="my_email"><strong>*Email</strong></label>
         <div>
           <input
             id="my_email"
@@ -47,13 +50,12 @@
             required
           />
         </div>
-        
       </div>
       <br />
 
-       <!-- Large Text Area -->
-       <div class="row">
-        <label for="textbox">*Write Message Here</label>
+      <!-- Large Text Area -->
+      <div class="row">
+        <label for="textbox"><strong>*Write Comment Here</strong></label>
 
         <div>
           <textarea
@@ -79,12 +81,12 @@
             tabindex="7"
           />
           <label for="*checkBox1"
-            >*I agree you that you can post my comments.</label
+            ><strong>*I agree you can post my comments.</strong></label
           >
         </div>
       </div>
 
-      <h5>*Must be completed to submit form.</h5>
+      <h5><strong>*Must be completed to submit form.</strong></h5>
 
       <!-- Submit Button-->
       <div>
@@ -94,20 +96,14 @@
       </div>
     </form>
 
-    <script type="module" src="/main.js"></script>
-  
-
-
-    <div class="card">
+    <section id="comments">
       <custom-comment
         name="Doris Lawrence"
         email="doris.lawrence@mymail.com"
         comment="I am the Owner of the company!"
       >
       </custom-comment>
-    </div>
 
-    <div class="card">
       <!-- <button id="button" type="button"></button> -->
       <custom-comment
         name="James Johnson"
@@ -115,9 +111,7 @@
         comment="I am a 20 year Army Veteran!"
       >
       </custom-comment>
-    </div>
 
-    <div class="card">
       <!-- <button id="button" type="button"></button> -->
       <custom-comment
         name="Patricia Morrow"
@@ -125,9 +119,7 @@
         comment="I have been a School Teacher for over 20 years!"
       >
       </custom-comment>
-    </div>
 
-    <div class="card">
       <!-- <button id="button" type="button"></button> -->
       <custom-comment
         name="Micheal Davis"
@@ -135,8 +127,7 @@
         comment="You better watch me!"
       >
       </custom-comment>
-    </div>
-
+    </section>
     <!-- link custom comment to comment.js which controls what custom comment tag does -->
     <script type="module" src="/comment.js"></script>
     <script type="module" src="/main.js"></script>

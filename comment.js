@@ -7,13 +7,13 @@ class Comment extends HTMLElement {
   }
   // overriding the connected callback method with my own html
    connectedCallback() {
-    this.innerHTML = `<section class="comment">
-
-    <div id="app"></div>
+    this.innerHTML = ` <div class="card"> 
+    <section class="comment">
     <h3>${this.getAttribute("name")}</h3>
     <h3>${this.getAttribute("email")}</h3>
     <p>${this.getAttribute("comment")}</p>
-  </section>`;
+  </section>
+  </div>`;
     }
 }
 
