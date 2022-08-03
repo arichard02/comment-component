@@ -7,12 +7,31 @@ class Comment extends HTMLElement {
   }
   // overriding the connected callback method with my own html
    connectedCallback() {
-    this.innerHTML = ` <div class="card"> 
+
+    const shadow = this.attachShadow({mode: "open"});
+ 
+// section tag inside a section tag produces double boxes on comments - (2 section tags)
+    shadow.innerHTML = ` <section class="comment"> 
     <section class="comment">
     <h3>${this.getAttribute("name")}</h3>
     <h3>${this.getAttribute("email")}</h3>
     <p>${this.getAttribute("comment")}</p>
+    <p>${this.getAttribute("timestamp")}</p>
   </section>
+
+  <style>
+  .comment {
+    border: solid black 10px;
+    padding: 15px;
+    margin: 20px;
+    background-color: aqua;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 300px;
+    text-align: center;
+  }
+  </style>
+
   </div>`;
     }
 }

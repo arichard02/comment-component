@@ -1,34 +1,55 @@
-import './style.css'
+import "./style.css";
 
 // main.js shows title and imports style.css
-document.querySelector('#app').innerHTML = `
-  <h1>New Comment Component</h1>
+document.querySelector("#app").innerHTML = `
+  <h1>Comment Component</h1>
 `;
 
 const addComment = (ev) => {
   ev.preventDefault();
-  console.log("hello world");
 
   // go into dom and find the element were id = full name and then get its value and store that value in a variable called name
   const name = document.querySelector("#full_name").value;
-  // print the thing stored in the variable name
-  console.log(name);
-
-  // // go into dom and find the element were id = email and then get its value and store that value in a variable called email
-  const email = document.querySelector("#my_email").value;
-  // // print the thing stored in the variable name
-  console.log(email);
-
+  const email = document.querySelector("#email").value;
   const textbox = document.querySelector("#textbox").value;
-  console.log(textbox);
+ 
+  const currentDate = new Date();
+  const timestamp = currentDate.getTime();
+  
+  // const timestamp = currentDate.toLocaleDateString();
+
+  const currentDayOfMonth = currentDate.getDate();
+  const currentMonth = currentDate.getMonth(); // Be careful! January is 0, not 1
+  const currentYear = currentDate.getFullYear();
+
+  const dateString = (currentMonth + 1) + "/" + currentDayOfMonth + "/" + currentYear + " " + timestamp;
+  
+ 
+ 
+  
+
+    // print the thing stored in the variable name
+    console.log(name);
+    // print the thing stored in the variable email
+    console.log(email);
+    // print the thing stored in the variable textbox
+    console.log(textbox);
+     // print the thing stored in the variable dateString
+    console.log(dateString);
+    // print the thing stored in the variable time
+    console.log(timestamp);
+  
 
   const template = `
   <custom-comment
         name="${name}"
         email="${email}"
-        comment="${textbox}">
-      </custom-comment>`; 
+        comment="${textbox}"
+        timestamp="${dateString}">
+      </custom-comment>`;
 
-document.querySelector("#comments").insertAdjacentHTML("afterbegin", template)
+  document
+    .querySelector("#comments")
+    .insertAdjacentHTML("afterbegin", template);
 };
 document.querySelector("form").addEventListener("submit", addComment);
