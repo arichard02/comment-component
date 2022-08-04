@@ -14,7 +14,7 @@ const addComment = (ev) => {
   const textbox = document.querySelector("#textbox").value;
  
   const currentDate = new Date();
-  const timestamp = currentDate.getTime();
+  const timestamp = currentDate.toLocaleTimeString();
   
   // const timestamp = currentDate.toLocaleDateString();
 
@@ -51,5 +51,9 @@ const addComment = (ev) => {
   document
     .querySelector("#comments")
     .insertAdjacentHTML("afterbegin", template);
+    document.querySelector("#full_name").value = "";
+    document.querySelector("#email").value = "";
+    document.querySelector("#textbox").value= "";
+    document.querySelector("#checkBox1").checked = false;
 };
 document.querySelector("form").addEventListener("submit", addComment);
