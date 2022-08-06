@@ -1,31 +1,15 @@
-/*
-
-Form component:
-1. Draws the form.
-2. Listens for the form submit
-3. It creates a new comment object:
-
-   {
-        name: __________,
-        email: _________,
-        comment: _______, 
-        timestamp: new Date()
-   }
-
-    and sends it to the state manager.
-4. It clears out the form
-
-*/
-
-
-export default class Form {
-
-    // what is a constructor?
-    // brings the instance to life
-    constructor(sm) {
-        this.stateManager = sm;
-        const formTemplate = `
-        <form>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comment Component</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- put form in here -->
+    <form>
       <!-- action="https://formsubmit.co/8ba5bda093183fd9c549c4f116f3338b"
       method="POST"
     > -->
@@ -111,38 +95,45 @@ export default class Form {
         </div>
       </div>
     </form>
-        `;
 
-        document.querySelector('.form-container').innerHTML = formTemplate;
+    <section id="comments">
+      <custom-comment
+        name="Doris Lawrence"
+        email="doris.lawrence@mymail.com"
+        comment="I am the Owner of TinyTot's Toyland!"
+        timestamp="7/30/22"
+      >
+      </custom-comment>
 
-        document.querySelector('form').addEventListener('submit', this.addComment.bind(this));
-    }
+      <!-- <button id="button" type="button"></button> -->
+      <custom-comment
+        name="James Johnson"
+        email="soliderguy@aol.com"
+        comment="I am a retired army veteran with over 20 years of service!"
+        timestamp="7/15/2022"
+      >
+      </custom-comment>
 
-    addComment (ev) {
-        // goal of add comment is to let the state manager know
-        // that a new comment has been added:
-        ev.preventDefault();
+      <!-- <button id="button" type="button"></button> -->
+      <custom-comment
+        name="Patricia Morrow"
+        email="schoolteacher@gmail.com"
+        comment="I love being a high school math teacher!"
+        timestamp="7/14/2022"
+      >
+      </custom-comment>
 
-        const date = new Date();
-        let dateString = date.toLocaleDateString();
-        dateString += " " + date.toLocaleTimeString();
-
-        const commentObject = {
-            name: document.querySelector('#full_name').value,
-            email: document.querySelector('#email').value,
-            comment: document.querySelector('#textbox').value, 
-            timestamp: dateString
-        }
-        console.log(commentObject);
-
-
-        // tell the state manager that we have
-        // a new comment to add:
-        this.stateManager.addComment(commentObject);
-
-
-        // Your Job: how do you clear out your form!!
-
-    }
-
-}
+      <!-- <button id="button" type="button"></button> -->
+      <custom-comment
+        name="Micheal Davis"
+        email="micheal@davismail.com"
+        comment="I'm a professional personal chef!"
+        timestamp="7/13/2022"
+      >
+      </custom-comment>
+    </section>
+    <!-- link custom comment to comment.js which controls what custom comment tag does -->
+    <script type="module" src="/comment.js"></script>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
