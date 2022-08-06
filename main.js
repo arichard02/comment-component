@@ -7,6 +7,7 @@ document.querySelector("#app").innerHTML = `
 
 const addComment = (ev) => {
   ev.preventDefault();
+  console.log('hello world')
 
   // go into dom and find the element were id = full name and then get its value and store that value in a variable called name
   const name = document.querySelector("#full_name").value;

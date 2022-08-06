@@ -1,43 +1,90 @@
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-  background-color: aqua ;
+body {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #F4F4F4;
+    margin: 0;
+}
+header {
+    text-align: center;
+    color: #fff;
+    background: #c06666;
+    margin-bottom: 40px;
+    padding: 20px;
+    /* box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); */
 }
 
-div {
-  
-  text-align: center;
-  background-color: rgb(239, 73, 73);
-
+.icon {
+  width: 80px;
+  vertical-align: bottom;
+  display: none;
 }
 
-h5 {
-  text-align: center;
-  font-style: italic;
+.row {
+    padding: 5px 0;
+}
+label { 
+    width: 100px;
+    text-align: right;
+    padding-right: 10px;
+    display: inline-block;
+    font-weight: bold;
+    vertical-align: top;
+}
+input, textarea {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    width: calc(100% - 150px);
+    padding: 10px;
+    font-size: 1.0em;
+} 
+textarea {
+    min-height: 100px;
+}
+button {
+    margin-left: 115px;
+    padding: 10px;
+    font-size: 1.0em;
 }
 
-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  align-items: center;
-  width: 400px;
-  height: 200px;
-  padding-bottom: 10px;
+header h1 {
+    margin: 0;
 }
 
-#comments {
-  display:flex;
-  flex-direction:column;
-  align-items: center;
-  background-color: blanchedalmond;
+main {
+    margin-left: 15vw;
+    margin-right: 15vw;
 }
 
-form {
-  background-color: blanchedalmond;
+.comments, form {
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    margin-bottom: 40px;
+    /* box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); */
 }
 
+.comment {
+    margin-bottom: 40px;
+    /* border-bottom: solid 1px #ccc; */
+}
+
+.user-info {
+  display: flex;
+  font-weight: bold;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 50px;
+  margin-right: 10px;
+}
+
+.user-info p {
+  margin: 0;
+}
+
+.comment-text {
+  margin: 0;
+  margin-left: 60px;
+  display: inline-block;
+}
