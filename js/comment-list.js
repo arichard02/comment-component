@@ -21,12 +21,12 @@ export default class CommentList {
 
             // creating an HTML representation of it
             let template = `
-                <user-comment 
-                    name="${full-name}" 
+                <custom-comment 
+                    name="${name}" 
                     email="${email}" 
                     comment="${comment}"
                     timestamp="${timestamp}">
-                </user-comment>
+                </custom-comment>
             `;
 
             // we need to append it to the DOM

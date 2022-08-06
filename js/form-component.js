@@ -25,28 +25,7 @@ export default class Form {
     constructor(sm) {
         this.stateManager = sm;
         const formTemplate = `
-        <form action="#">
-            <h2>Add New Comment</h2>
-            <div class="row">
-            <label for="name">Name:</label>
-            <input type="text" id="name" placeholder="Your name" required />
-            </div>
-            <div class="row">
-            <label for="email">Email:</label>
-            <input
-                type="email"
-                id="email"
-                placeholder="Your email address"
-                required
-            />
-            </div>
-            <div class="row">
-            <label for="comment">Comment:</label>
-            <textarea id="comment" required></textarea>
-            </div>
-
-            <button type="submit">Add Comment</button>
-        </form>
+        
         `;
 
         document.querySelector('.form-container').innerHTML = formTemplate;
