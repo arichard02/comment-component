@@ -142,6 +142,11 @@ export default class Form {
 
 
         // Your Job: how do you clear out your form!!
+        document.querySelector('#full_name').value = "";
+        document.querySelector('#email').value = "";
+        document.querySelector('#textbox').value = "";
+        document.querySelector('#checkBox1').checked = false;
+
 
     }
 

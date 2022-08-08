@@ -1,10 +1,10 @@
 // creating a new class that controls what new element will look like
 // includes what attributes are needed and how they are presented
 // also include a style tag with style rules(optional)
-class Comment extends HTMLElement {
-  constructor() {
-    super();
-  }
+export default class Comment extends HTMLElement {
+  // constructor() {
+  //   super();
+  // }
   // overriding the connected callback method with my own html
    connectedCallback() {
 
@@ -15,6 +15,7 @@ class Comment extends HTMLElement {
     <section class="comment">
     <h3>${this.getAttribute("name")}</h3>
     <h3>${this.getAttribute("email")}</h3>
+    <br>
     <p>${this.getAttribute("comment")}</p>
     <p>${this.getAttribute("timestamp")}</p>
   </section>
