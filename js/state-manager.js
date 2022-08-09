@@ -70,19 +70,19 @@ export default class StateManager {
     // Q: How do I notify them?
     // A: I trigger the function they told me to trigger.
     for (let i = 0; i < this.subscribers.length; i++) {
-      // const theEvent = this.subscribers[i][0];
-      // const theFunction = this.subscribers[i][1];
-      // if(theEvent=="add comment") {
-      //     theFunction(this.comments);
-      // }
-
-      const subscriber = this.subscribers[i];
-      const eventName = subscriber[0];
-      const f = subscriber[1];
-      if (eventName === "comment-added") {
-        console.log("notifying my subscriber");
-        f(this.comments);
+      const theEvent = this.subscribers[i][0];
+      const theFunction = this.subscribers[i][1];
+      if(theEvent=="add comment") {
+          theFunction(this.comments);
       }
+
+    //   const subscriber = this.subscribers[i];
+    //   const eventName = subscriber[0];
+    //   const f = subscriber[1];
+    //   if (eventName === "comment-added") {
+    //     console.log("notifying my subscriber");
+    //     f(this.comments);
+    //   }
     }
   }
 

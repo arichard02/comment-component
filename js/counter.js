@@ -1,7 +1,7 @@
 export default class Counter {
     constructor(stateManager) {
-        stateManager.subscribe( "comment-added", this.redraw.bind(this));
-        // stateManager.subcriber("comment-added", this.greeting.bind(this));;
+        // stateManager.subscribe( "comment-added", this.redraw.bind(this));
+        // // stateManager.subcriber("comment-added", this.greeting.bind(this));;
 
         this.redraw(stateManager.comments);
     }
@@ -12,8 +12,8 @@ export default class Counter {
         `;
     }
 
-    // greeting function
-    greeting() {
-        console.log("Hello World!");
+    // // greeting function
+    // greeting() {
+    //     console.log("Hello World!");
     }
 }
