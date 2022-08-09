@@ -19,35 +19,70 @@ export default class StateManager {
   constructor() {
     // this week: figuring out how to store and then reload
     // comments using indexDB.
-    this.comments = [
-      {
-        name: "Doris Lawrence",
-        email: "doris.lawrence@mymail.com",
-        comment: "I am the Owner of TinyTot's Toyland!",
-        timestamp: "7/30/2022 3:15:13PM",
-      },
-      {
-        name: "James Johnson",
-        email: "soliderguy@aol.com",
-        comment: "I am a retired army veteran with over 20 years of service! ",
-        timestamp: "8/3/2022 3:15:13PM",
-      },
-      {
-        name: "Patricia Morrow",
-        email: "schoolteacher@gmail.com",
-        comment: "I love being a high school math teacher!",
-        timestamp: "8/4/2022 3:15:13PM",
-      },
-      {
-        name: "Micheal Davis",
-        email: "micheal@davismail.com",
-        comment: "I'm a professional personal chef! ",
-        timestamp: "8/4/2022 3:15:13PM",
-      },
-    ];
+    // this.comments = [
+    //   {
+    //     name: "Doris Lawrence",
+    //     email: "doris.lawrence@mymail.com",
+    //     comment: "I am the Owner of TinyTot's Toyland!",
+    //     timestamp: "7/30/2022 3:15:13PM",
+    //   },
+    //   {
+    //     name: "James Johnson",
+    //     email: "soliderguy@aol.com",
+    //     comment: "I am a retired army veteran with over 20 years of service! ",
+    //     timestamp: "8/3/2022 3:15:13PM",
+    //   },
+    //   {
+    //     name: "Patricia Morrow",
+    //     email: "schoolteacher@gmail.com",
+    //     comment: "I love being a high school math teacher!",
+    //     timestamp: "8/4/2022 3:15:13PM",
+    //   },
+    //   {
+    //     name: "Micheal Davis",
+    //     email: "micheal@davismail.com",
+    //     comment: "I'm a professional personal chef! ",
+    //     timestamp: "8/4/2022 3:15:13PM",
+    //   },
+    // ];
 
     // mailing list.
     this.subscribers = [];
+    this.loadDatabase();
+  }
+
+  // This method does 2 things:
+  // 1. Loads database 
+  // 2. Creates a new comment store if it doesn't exsist
+  // 3. Reads the comment store
+  loadDatabase() {
+    let db;
+
+    var openRequest = indexedDB.open("adwaina_app_db", 2);
+
+    // 1. This function created our new data store:
+    openRequest.onupgradeneeded = function (e) {
+      var db = e.target.result;
+      console.log("running onupgradeneeded");
+
+      // create new data stores:
+      if (!db.objectStoreNames.contains("comments")) {
+        var storeOS = db.createObjectStore("comments", {
+          keyPath: "id",
+          autoincrement: true,
+        });
+      }
+    };
+
+    // 2. This function fires when the database has been opened.
+    // This is where we will add new comments to the datastore:
+    openRequest.onsuccess = (function (e) {
+      console.log("running onsuccess");
+      db = e.target.result;
+      // call this function to create a new comment:
+     
+      this.readCommentsFromDataStore(db);
+    }).bind(this);
   }
 
   // 2. Method to add a new comment and to update
@@ -58,32 +93,7 @@ export default class StateManager {
     // adding a new comment object to the comment array
     this.comments.push(newComment);
     console.log(this.comments);
-    // Now we to notify all the subscribers that a comment has been added
-    // so that each subscribr can respond
-    // to do this we are going to loop through each subscriber and invoke a callbak function
-
-    // I need to be notify everyone that a "comment-updated" event has just
-    // happened!
-    // Q: Why do I notify?
-    // A: My subscribers!!! (which are stored in this.subscribers (and array)
-    //
-    // Q: How do I notify them?
-    // A: I trigger the function they told me to trigger.
-    for (let i = 0; i < this.subscribers.length; i++) {
-      const theEvent = this.subscribers[i][0];
-      const theFunction = this.subscribers[i][1];
-      if(theEvent=="add comment") {
-          theFunction(this.comments);
-      }
-
-    //   const subscriber = this.subscribers[i];
-    //   const eventName = subscriber[0];
-    //   const f = subscriber[1];
-    //   if (eventName === "comment-added") {
-    //     console.log("notifying my subscriber");
-    //     f(this.comments);
-    //   }
-    }
+   this.notify("comment-added", this.comments);
   }
 
   // 3. Method that allows other component to subscribe
@@ -96,4 +106,50 @@ export default class StateManager {
     // the second element is a function that will get invoked when the event happens
     this.subscribers.push([theEvent, theResponse]);
   }
+
+
+
+  notify(theEvent, theData) {
+    // Now we to notify all the subscribers that a comment has been added
+    // so that each subscribr can respond
+    // to do this we are going to loop through each subscriber and invoke a callbak function
+
+    // I need to be notify everyone that a "comment-updated" event has just
+    // happened!
+    // Q: Why do I notify?
+    // A: My subscribers!!! (which are stored in this.subscribers (and array)
+    //
+    // Q: How do I notify them?
+    // A: I trigger the function they told me to trigger.
+    for (let i = 0; i < this.subscribers.length; i++) {
+      const subscriberEvent = this.subscribers[i][0];
+      const theFunction = this.subscribers[i][1];
+      if (theEvent == subscriberEvent) {
+        theFunction(theData);
+      }
+
+      
+    }
+  }
+
+  readCommentsFromDataStore (db) {
+    var transaction = db.transaction('comments', 'readonly');
+    var objectStore = transaction.objectStore('comments');
+    var cursorRequest = objectStore.openCursor();
+    var commentList = [];
+    cursorRequest.onsuccess = function (event){
+        if (event.target.result){
+            // if(event.target.result.value['id'] && event.target.result.value['id'] == value){ //compare values
+                commentList.push(event.target.result.value);
+            // }
+            event.target.result['continue']();
+        }
+    };
+
+    transaction.oncomplete = (function (event) {
+        console.log(commentList);
+        this.notify("comments-loaded", commentList);
+        // callback(agregate); // return items
+    }).bind(this);
+}
 }

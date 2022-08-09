@@ -43,8 +43,8 @@ const addDataToCommentsDataStore = (db) => {
      var comments = transaction.objectStore('comments');
      console.log(comments);
      var request = comments.add({
-         id: 4,
-         name: "Doris",
+         id: 6,
+         name: "Chris",
          email: "sugarspice@gmail.com",
          comment: "I'm a daycare Provider ",
          timestamp: "8/4/2022 3:15:13PM"

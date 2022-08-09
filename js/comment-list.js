@@ -12,9 +12,9 @@ export default class CommentList {
       // tells the state manager that when the "comments-updated"
       // event happens, it should invoke the "redraw method".
       stateManager.subscribe("comment-added", this.redraw.bind(this));
+      stateManager.subscribe("comments-loaded", this.redraw.bind(this));
      
-     
-      this.redraw(stateManager.comments);
+      // this.redraw(stateManager.comments);
   } 
 
   redraw(comments) {
