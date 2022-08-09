@@ -13,7 +13,7 @@ export default class Counter {
     }
 
     // // greeting function
-    // greeting() {
-    //     console.log("Hello World!");
+    greeting() {
+        console.log("Hello World!");
     }
 }
