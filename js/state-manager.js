@@ -56,13 +56,14 @@ export default class StateManager {
   // 2. Creates a new comment store if it doesn't exsist
   // 3. Reads the comment store
   loadDatabase() {
-    let db;
+    // let db;
 
     var openRequest = indexedDB.open("adwaina_app_db", 2);
 
     // 1. This function created our new data store:
     openRequest.onupgradeneeded = function (e) {
-      var db = e.target.result;
+      this.db = e.target.result;
+      let db = this.db
       console.log("running onupgradeneeded");
 
       // create new data stores:
@@ -72,7 +73,7 @@ export default class StateManager {
           autoincrement: true,
         });
       }
-    };
+    }.bind(this);
 
     // 2. This function fires when the database has been opened.
     // This is where we will add new comments to the datastore:
@@ -81,7 +82,7 @@ export default class StateManager {
       db = e.target.result;
       // call this function to create a new comment:
      
-      this.readCommentsFromDataStore(db);
+      this.readCommentsFromDataStore(db, "comments-loaded");
     }).bind(this);
   }
 
@@ -91,11 +92,40 @@ export default class StateManager {
   addComment(newComment) {
     // "push" method of an array appends an items to the bottom -
     // adding a new comment object to the comment array
-    this.comments.push(newComment);
-    console.log(this.comments);
-   this.notify("comment-added", this.comments);
-  }
+  //   this.comments.push(newComment);
+  //   console.log(this.comments);
+  //  this.notify("comment-added", this.comments);
+  // }
 
+  var openRequest = indexedDB.open("adwaina_app_db", 2);
+  openRequest.onsuccess = function (e) {
+    console.log("running onsuccess");
+    db = e.target.result;
+  // call this function to create a new comment:
+
+      var transaction = db.transaction(["comments"], "readwrite");
+      var comments = transaction.objectStore("comments");
+      newComment.id = Math.floor(Math.random() * 100000000);
+      console.log(newComment);
+      console.log(comments);
+      var request = comments.add(newComment);
+
+      request.onerror = function (e) {
+        console.log("Error", e.target.error.name);
+      };
+      request.onsuccess = function (e) {
+        console.log("The comment has been successfully added!");
+        this.readCommentsFromDataStore(db, "comment-added");
+      }.bind(this);
+
+      // Commit: close connection
+      transaction.oncomplete = () => {
+        db.close();
+      };
+    }.bind(this);
+    let db = this.db;
+  }
+ 
   // 3. Method that allows other component to subscribe
   // to specific events, and which functions to invoke
   // when those events are triggered:
@@ -106,8 +136,6 @@ export default class StateManager {
     // the second element is a function that will get invoked when the event happens
     this.subscribers.push([theEvent, theResponse]);
   }
-
-
 
   notify(theEvent, theData) {
     // Now we to notify all the subscribers that a comment has been added
@@ -121,16 +149,27 @@ export default class StateManager {
     //
     // Q: How do I notify them?
     // A: I trigger the function they told me to trigger.
-    for (let i = 0; i < this.subscribers.length; i++) {
-      const subscriberEvent = this.subscribers[i][0];
-      const theFunction = this.subscribers[i][1];
-      if (theEvent == subscriberEvent) {
-        theFunction(theData);
-      }
+  //   for (let i = 0; i < this.subscribers.length; i++) {
+  //     const subscriberEvent = this.subscribers[i][0];
+  //     const theFunction = this.subscribers[i][1];
+  //     if (theEvent == subscriberEvent) {
+  //       theFunction(theData);
+  //     }
 
       
+  //   }
+  // }
+
+  for (let i = 0; i < this.subscribers.length; i++) {
+    const subscriber = this.subscribers[i];
+    const eventName = subscriber[0];
+    const f = subscriber[1];
+    if (eventName === theEvent) {
+      console.log("notifying my subscriber");
+      f(theData);
     }
   }
+}
 
   readCommentsFromDataStore (db) {
     var transaction = db.transaction('comments', 'readonly');

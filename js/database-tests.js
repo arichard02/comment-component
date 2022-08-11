@@ -8,7 +8,7 @@ a container to put all of our comments in.
 4. Make sure it saves!
 
 */
-
+console.log("database");
 let db;
 
 var openRequest = indexedDB.open('adwaina_app_db', 2);

@@ -3,7 +3,7 @@ import './comment.js'
 import StateManager from './state-manager.js'
 import CommentList from './comment-list.js'
 import Form from './form-component'; 
-// import Counter from './counter.js'
+// import Counter from './counter.js';
 
 /*
 Goal:
