@@ -58,7 +58,7 @@ export default class StateManager {
   loadDatabase() {
     // let db;
 
-    var openRequest = indexedDB.open("adwaina_app_db", 2);
+    var openRequest = indexedDB.open('#movieDetails', 4);
 
     // 1. This function created our new data store:
     openRequest.onupgradeneeded = function (e) {
