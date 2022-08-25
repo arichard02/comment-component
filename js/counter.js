@@ -16,4 +16,3 @@ export default class Counter {
     // greeting() {
     //     console.log("Hello World!");
     }
-}
