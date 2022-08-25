@@ -1,9 +1,9 @@
 import '../style.css'
 import './comment.js'
 import StateManager from './state-manager.js'
-import CommentList from './movie-list.js'
+import CommentList from './comment-list.js'
 import Form from './form-component'; 
-// import Counter from './counter.js';
+// import Counter from './counter'
 
 /*
 Goal:
@@ -15,5 +15,5 @@ Goal:
 
 const stateManager = new StateManager();
 // const counter = new Counter(stateManager);
-const movieList = new MovieList(stateManager);
+const commentList = new CommentList(stateManager);
 const form = new Form(stateManager);
