@@ -4,8 +4,11 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite serve src",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "vite build src",
+    "preview": "vite preview",
+    
+    "postbuild": "mv src/dist dist"
+
   },
   "devDependencies": {
     "eslint": "^8.20.0",
