@@ -21,6 +21,8 @@ export default class Form {
   constructor(sm) {
       this.stateManager = sm;
       const formTemplate = `
+
+      
       <form>
     <!-- action="https://formsubmit.co/8ba5bda093183fd9c549c4f116f3338b"
     method="POST"

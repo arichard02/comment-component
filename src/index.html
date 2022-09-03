@@ -25,6 +25,23 @@
     </main>
 
     <!-- Kicks off your web application -->
+    <script type="module" src="/js/comment.js"></script>
     <script type="module" src="/js/main.js"></script>
+
+     <!-- Regiters the service worker, which is stored at sw.js -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log(`Service Worker registered! Scope: ${registration.scope}`);
+          })
+          .catch(err => {
+            console.log(`Service Worker registration failed: ${err}`);
+          });
+      });
+    }
+  </script>
+
   </body>
 </html>

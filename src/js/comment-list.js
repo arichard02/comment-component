@@ -13,6 +13,7 @@ export default class CommentList {
       // tells the state manager that when the "comments-updated"
       // event happens, it should invoke the "redraw method".
       stateManager.subscribe("comment-added", this.redraw.bind(this));
+      // stateManager.subscribe("comments-loaded", this.redraw.bind(this));
      
      
       this.redraw(stateManager.comments);
@@ -32,10 +33,10 @@ export default class CommentList {
       // creating an HTML representation of it
       let template = `
                 <custom-comment 
-                    name="${comments[i].name}" 
-                    email="${comments[i].email}" 
-                    comment="${comments[i].comment}"
-                    timestamp="${comments[i].timestamp}">
+                    name = "${comments[i].name}" 
+                    email = "${comments[i].email}" 
+                    comment = "${comments[i].comment}"
+                    timestamp = "${comments[i].timestamp}">
                 </custom-comment>
             `;
       console.log(template)
