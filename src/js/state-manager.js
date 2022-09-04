@@ -15,89 +15,128 @@ export default class StateManager {
   //      sets up the datastore (this.comments array) and
   //      sets up the subscribers (this.subscribers array)
   constructor() {
-    // this week: figuring out how to store and then reload
-    // comments using indexDB.
-    this.comments = [
-      {
-        name: "Doris Lawrence",
-        email: "doris.lawrence@mymail.com",
-        comment: "I am the Owner of TinyTot's Toyland!",
-        timestamp: "7/30/2022 3:15:13PM",
-      },
-      {
-        name: "James Johnson",
-        email: "soliderguy@aol.com",
-        comment: "I am a retired army veteran with over 20 years of service! ",
-        timestamp: "8/3/2022 3:15:13PM",
-      },
-      {
-        name: "Patricia Morrow",
-        email: "schoolteacher@gmail.com",
-        comment: "I love being a high school math teacher!",
-        timestamp: "8/4/2022 3:15:13PM",
-      },
-      {
-        name: "Micheal Davis",
-        email: "micheal@davismail.com",
-        comment: "I'm a professional personal chef! ",
-        timestamp: "8/4/2022 3:15:13PM",
-      },
-    ];
+  //   // this week: figuring out how to store and then reload
+  //   // comments using indexDB.
+  //   this.comments = [
+  //     {
+  //       name: "Doris Lawrence",
+  //       email: "doris.lawrence@mymail.com",
+  //       comment: "I am the Owner of TinyTot's Toyland!",
+  //       timestamp: "7/30/2022 3:15:13PM",
+  //     },
+  //     {
+  //       name: "James Johnson",
+  //       email: "soliderguy@aol.com",
+  //       comment: "I am a retired army veteran with over 20 years of service! ",
+  //       timestamp: "8/3/2022 3:15:13PM",
+  //     },
+  //     {
+  //       name: "Patricia Morrow",
+  //       email: "schoolteacher@gmail.com",
+  //       comment: "I love being a high school math teacher!",
+  //       timestamp: "8/4/2022 3:15:13PM",
+  //     },
+  //     {
+  //       name: "Micheal Davis",
+  //       email: "micheal@davismail.com",
+  //       comment: "I'm a professional personal chef! ",
+  //       timestamp: "8/4/2022 3:15:13PM",
+  //     },
+  //   ];
 
     // mailing list.
-    this.commnt = [];
+    this.comments = [];
     this.subscribers = [];
+    this.loadDatabase();
   }
 
-  // 2. Method to add a new comment and to update
-  //   subscribes who are listening to the
-  //   "comment-added" event:
-  addComment(newComment) {
-    // "push" method of an array appends an items to the bottom -
-    // adding a new comment object to the comment array
-    this.comments.push(newComment);
-    console.log(this.comments);
+  //This method does 3 things; loads db(moniqueapp.db)
+  //& creates a new comment store if it doesn't exist.
+  //Then, it reads the comment store
+  loadDatabase() {
+    let db;
 
-    // Now we to notify all the subscribers that a comment has been added
-    // so that each subscribr can respond
-    // to do this we are going to loop through each subscriber and invoke a callbak function
+    var openRequest = indexedDB.open("adwaina_app_db", 2);
 
-    // I need to be notify everyone that a "comment-updated" event has just
-    // happened!
-    // Q: Why do I notify?
-    // A: My subscribers!!! (which are stored in this.subscribers (and array)
-    //
-    // Q: How do I notify them?
-    // A: I trigger the function they told me to trigger.
-    for (let i = 0; i < this.subscribers.length; i++) {
-      const subscriber = this.subscribers[i];
-      const theEvent = this.subscribers[0];
-      const theFunction = this.subscribers[1];
-      if(theEvent === "comment-added") {
-        console.log("notifying my subscriber");
-          theFunction(this.comments);
+    // 1. This function created our new data store:
+    openRequest.onupgradeneeded = function (e) {
+      var db = e.target.result;
+      console.log("running onupgradeneeded");
+
+      // create new data stores:
+      if (!db.objectStoreNames.contains("comments")) {
+        var storeOS = db.createObjectStore("comments", {
+          keyPath: "id",
+          autoincrement: true,
+        });
       }
+    };
 
-    //   const subscriber = this.subscribers[i];
-    //   const eventName = subscriber[0];
-    //   const f = subscriber[1];
-    //   if (eventName === "comment-added") {
-    //     console.log("notifying my subscriber");
-    //     f(this.comments);
-    //   }
+    // 2. This function fires when the database has been opened.
+    // This is where we will add new comments to the datastore:
+    openRequest.onsuccess = (function (e) {
+      console.log("running onsuccess");
+      db = e.target.result;
+      // call this function to create a new comment:
+      
+      this.readCommentsFromDataStore(db);
+    }).bind(this);
+  }
+
+  // 2. we need a way to update the comments list
+  //The form invoked the stateManager's add comment function
+  addComment(newComment) {
+    this.comments.push(newComment);
+    //push method of an array appends item to the bottom
+    console.log(this.comments);
+    this.notify("comment-added", this.comments);
+    
+  }
+
+  // 3. We need a way to tell the other components to redraw
+  subscribe(theEvent, theResponse) {
+    //This code adds a list of two elements to the subscribers array
+    //What happens---The first element is a string that indicates which
+    //event the subscriber's interested in (comment added, deleted, liked)
+    //The reponse to what hap---the second element is a function that will get
+    //invoked/executed when the event happens
+
+    this.subscribers.push([theEvent, theResponse]);
+  }
+
+  notify(theEvent, theData) {
+    //Now we need to notify all of the subscribers that
+    //a comment has been added
+    //So that each subscriber can respond
+    //To do this we loop thru ea. subscriber
+    //and invoke the cb function
+    for (let i = 0; i < this.subscribers.length; i++) {
+      const subscriberEvent = this.subscribers[i][0];
+      const theFunction = this.subscribers[i][1];
+      if (theEvent == subscriberEvent) {
+        theFunction(theData);
+      }
     }
   }
 
-  // 3. Method that allows other component to subscribe
-  // to specific events, and which functions to invoke
-  // when those events are triggered:
-  subscribe(theEvent, theResponse) {
-    // this code adds a list of two elements to the subscribers array
-    // the first element is a string that indicates which event to subscriber is interested in
-    // is interested in ...ie comment add, comment deleted
-    // the second element is a function that will get invoked when the event happens
-    this.subscribers.push([
-      theEvent, theResponse
-    ])
+  readCommentsFromDataStore(db) {
+    var transaction = db.transaction("comments", "readonly");
+    var objectStore = transaction.objectStore("comments");
+    var cursorRequest = objectStore.openCursor();
+    var commentList = [];
+    cursorRequest.onsuccess = function (event) {
+      if (event.target.result) {
+        // if(event.target.result.value['id'] && event.target.result.value['id'] == value){ //compare values
+        commentList.push(event.target.result.value);
+        // }
+        event.target.result["continue"]();
+      }
+    };
+
+    transaction.oncomplete = function (event) {
+      console.log(commentList);
+      this.notify("comments-loaded", commentList);
+      // callback(agregate); // return items
+    }.bind(this);
   }
 }

@@ -27,11 +27,14 @@ export default class Form {
     <!-- action="https://formsubmit.co/8ba5bda093183fd9c549c4f116f3338b"
     method="POST"
   > -->
-    <!-- full name -->
-    <img
+
+  <img
       src="https://www.nsouly.com/wp-content/uploads/2020/05/How-to-Turn-Off-Comments-on-Facebook-Posts-960x540.jpg"
       alt="keyboard with word comment"
     />
+
+    <!-- full name -->
+    
     <div class="row">
       <label class="desc" for="full_name"><strong>*Full Name</strong></label>
       <div>
@@ -140,7 +143,8 @@ export default class Form {
       document.querySelector('#textbox').value = "";
       document.querySelector('#checkBox1').checked = false;
 
-
+      // tells the state manager tht we have a new comment to add:
+      this.stateManager.addComment(commentObject);
   }
 
 }

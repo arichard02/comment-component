@@ -20,6 +20,12 @@ h5 {
   font-style: italic;
 }
 
+#title {
+font-style: italic;
+text-align: center;
+font-color: red;
+}
+
 img {
   display: block;
   margin-left: auto;
