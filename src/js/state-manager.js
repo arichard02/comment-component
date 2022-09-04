@@ -17,32 +17,32 @@ export default class StateManager {
   constructor() {
   //   // this week: figuring out how to store and then reload
   //   // comments using indexDB.
-  //   this.comments = [
-  //     {
-  //       name: "Doris Lawrence",
-  //       email: "doris.lawrence@mymail.com",
-  //       comment: "I am the Owner of TinyTot's Toyland!",
-  //       timestamp: "7/30/2022 3:15:13PM",
-  //     },
-  //     {
-  //       name: "James Johnson",
-  //       email: "soliderguy@aol.com",
-  //       comment: "I am a retired army veteran with over 20 years of service! ",
-  //       timestamp: "8/3/2022 3:15:13PM",
-  //     },
-  //     {
-  //       name: "Patricia Morrow",
-  //       email: "schoolteacher@gmail.com",
-  //       comment: "I love being a high school math teacher!",
-  //       timestamp: "8/4/2022 3:15:13PM",
-  //     },
-  //     {
-  //       name: "Micheal Davis",
-  //       email: "micheal@davismail.com",
-  //       comment: "I'm a professional personal chef! ",
-  //       timestamp: "8/4/2022 3:15:13PM",
-  //     },
-  //   ];
+    // this.comments = [
+    //   {
+    //     name: "Doris Lawrence",
+    //     email: "doris.lawrence@mymail.com",
+    //     comment: "I am the Owner of TinyTot's Toyland!",
+    //     timestamp: "7/30/2022 3:15:13PM",
+    //   },
+    //   {
+    //     name: "James Johnson",
+    //     email: "soliderguy@aol.com",
+    //     comment: "I am a retired army veteran with over 20 years of service! ",
+    //     timestamp: "8/3/2022 3:15:13PM",
+    //   },
+    //   {
+    //     name: "Patricia Morrow",
+    //     email: "schoolteacher@gmail.com",
+    //     comment: "I love being a high school math teacher!",
+    //     timestamp: "8/4/2022 3:15:13PM",
+    //   },
+    //   {
+    //     name: "Micheal Davis",
+    //     email: "micheal@davismail.com",
+    //     comment: "I'm a professional personal chef! ",
+    //     timestamp: "8/4/2022 3:15:13PM",
+    //   },
+    // ];
 
     // mailing list.
     this.comments = [];
@@ -72,8 +72,8 @@ export default class StateManager {
       }
     };
 
-    // 2. This function fires when the database has been opened.
-    // This is where we will add new comments to the datastore:
+  //   // 2. This function fires when the database has been opened.
+  //   // This is where we will add new comments to the datastore:
     openRequest.onsuccess = (function (e) {
       console.log("running onsuccess");
       db = e.target.result;

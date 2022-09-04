@@ -39,7 +39,7 @@ export default class CommentList {
                     timestamp = "${comments[i].timestamp}">
                 </custom-comment>
             `;
-      console.log(template)
+      // console.log(template)
       // we need to append it to the DOM
       document
         .querySelector(".comments")

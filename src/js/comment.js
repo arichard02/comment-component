@@ -16,7 +16,6 @@ export default class Comment extends HTMLElement {
 // section tag inside a section tag produces double boxes on comments - (2 section tags)
     shadow.innerHTML = ` <section class="comment"> 
 
-    <section class="comment">
     <h3>${this.getAttribute("name")}</h3>
     <h3>${this.getAttribute("email")}</h3>
     <br>

@@ -32,7 +32,7 @@ openRequest.onsuccess = function(e) {
     console.log('running onsuccess');
     db = e.target.result;
     // call this function to create a new comment:
-     addDataToCommentsDataStore(db);
+    addDataToCommentsDataStore(db);
     readCommentsFromDataStore(db);
 
 };
@@ -68,8 +68,8 @@ const readCommentsFromDataStore = (db) => {
     var objectStore = transaction.objectStore('comments');
     var cursorRequest = objectStore.openCursor();
     var commentList = [];
-    cursorRequest.onsuccess = function (event){
-        if (event.target.result){
+    cursorRequest.onsuccess = function (event) {
+        if (event.target.result) {
             // if(event.target.result.value['id'] && event.target.result.value['id'] == value){ //compare values
                 commentList.push(event.target.result.value);
             // }

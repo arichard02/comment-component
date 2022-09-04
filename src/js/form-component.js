@@ -1,4 +1,5 @@
 /*
+
 Form component:
 1. Draws the form.
 2. Listens for the form submit
@@ -11,8 +12,8 @@ Form component:
    }
     and sends it to the state manager.
 4. It clears out the form
-*/
 
+*/
 
 export default class Form {
 
@@ -132,11 +133,6 @@ export default class Form {
       console.log(commentObject);
 
 
-      // tell the state manager that we have
-      // a new comment to add:
-      this.stateManager.addComment(commentObject);
-
-
       // Your Job: how do you clear out your form!!
       document.querySelector('#full_name').value = "";
       document.querySelector('#email').value = "";
@@ -145,6 +141,9 @@ export default class Form {
 
       // tells the state manager tht we have a new comment to add:
       this.stateManager.addComment(commentObject);
-  }
 
-}
+     
+      
+
+    }
+  }
