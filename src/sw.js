@@ -14,76 +14,67 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.5.0/workbox-sw.js');
-
+importScripts(
+  "https://storage.googleapis.com/workbox-cdn/releases/3.5.0/workbox-sw.js"
+);
 
 import {
-    pageCache,
-    imageCache,
-    staticResourceCache,
-    googleFontsCache,
-    offlineFallback,
-  } from 'workbox-recipes';
-  
-  if (workbox) {
-    console.log(`Yay! Workbox is loaded 🎉`);
-   
-    
-    workbox.precaching.precacheAndRoute([
-        '**/*.html'
-    ]);
+  pageCache,
+  imageCache,
+  staticResourceCache,
+  googleFontsCache,
+  offlineFallback,
+} from "workbox-recipes";
 
+if (workbox) {
+  console.log(`Yay! Workbox is loaded 🎉`);
 
-    pageCache();
+  workbox.precaching.precacheAndRoute(["**/*.html"]);
 
-    googleFontsCache();
-  
-    staticResourceCache();
-  
-    imageCache();
-  
-    offlineFallback();
+  pageCache();
 
+  googleFontsCache();
 
+  staticResourceCache();
 
-    // workbox.routing.registerRoute(
-    //   /(.*)articles(.*)\.(?:png|gif|jpg)/,
-    //   workbox.strategies.cacheFirst({
-    //     cacheName: "images-cache",
-    //     plugins: [
-    //       new workbox.expiration.Plugin({
-    //         maxEntries: 50,
-    //         maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
-    //       }),
-    //     ],
-    //   })
-    // );
-  
-//     const articleHandler = workbox.strategies.networkFirst({
-//       cacheName: 'articles-cache',
-//       plugins: [
-//         new workbox.expiration.Plugin({
-//           maxEntries: 50,
-//         })
-//       ]
-//     });
-  
-//   // workbox.routing .registerRoute(/(.*)
-    
-//     workbox.routing.registerRoute(/(.*)\.html/, args => {
-//       return articleHandler.handle(args).then(response => {
-//           if (!response) {
-//             return caches.match('pages/offline.html');
-//           } else if (response.status === 404) {
-//             return caches.match('pages/404.html');
-//           }
-//           return response;
-//         });
-//     });
-  
-  } else {
-    console.log(`Boo! Workbox didn't load 😬`);
-  }
-  
-  
+  imageCache();
+
+  offlineFallback();
+
+  // workbox.routing.registerRoute(
+  //   /(.*)articles(.*)\.(?:png|gif|jpg)/,
+  //   workbox.strategies.cacheFirst({
+  //     cacheName: "images-cache",
+  //     plugins: [
+  //       new workbox.expiration.Plugin({
+  //         maxEntries: 50,
+  //         maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
+  //       }),
+  //     ],
+  //   })
+  // );
+
+  //     const articleHandler = workbox.strategies.networkFirst({
+  //       cacheName: 'articles-cache',
+  //       plugins: [
+  //         new workbox.expiration.Plugin({
+  //           maxEntries: 50,
+  //         })
+  //       ]
+  //     });
+
+  //   // workbox.routing .registerRoute(/(.*)
+
+  //     workbox.routing.registerRoute(/(.*)\.html/, args => {
+  //       return articleHandler.handle(args).then(response => {
+  //           if (!response) {
+  //             return caches.match('pages/offline.html');
+  //           } else if (response.status === 404) {
+  //             return caches.match('pages/404.html');
+  //           }
+  //           return response;
+  //         });
+  //     });
+} else {
+  console.log(`Boo! Workbox didn't load 😬`);
+}

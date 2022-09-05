@@ -1,8 +1,8 @@
-import '../style.css'
+import "../style.css";
 // import './comment.js'
-import StateManager from './state-manager.js'
-import CommentList from './comment-list.js'
-import Form from './form-component'; 
+import StateManager from "./state-manager.js";
+import CommentList from "./comment-list.js";
+import Form from "./form-component";
 // import Counter from './counter'
 
 /*

@@ -1,4 +1,3 @@
-
 /*
 The job of the comment list is to:
 1. At the very beginning, draw all the comments.
@@ -7,17 +6,15 @@ The job of the comment list is to:
 */
 
 export default class CommentList {
- 
   constructor(stateManager) {
-      // when the comment list is first created, the comment list
-      // tells the state manager that when the "comments-updated"
-      // event happens, it should invoke the "redraw method".
-      stateManager.subscribe("comment-added", this.redraw.bind(this));
-      stateManager.subscribe("comments-loaded", this.redraw.bind(this));
-     
-     
-      // this.redraw(stateManager.comments);
-  } 
+    // when the comment list is first created, the comment list
+    // tells the state manager that when the "comments-updated"
+    // event happens, it should invoke the "redraw method".
+    stateManager.subscribe("comment-added", this.redraw.bind(this));
+    stateManager.subscribe("comments-loaded", this.redraw.bind(this));
+
+    // this.redraw(stateManager.comments);
+  }
 
   redraw(comments) {
     // the "redraw" method will CLEAR OUT THE OLD COMMENTS and
@@ -29,7 +26,6 @@ export default class CommentList {
     console.log(comments);
 
     for (let i = 0; i < comments.length; i++) {
-
       // creating an HTML representation of it
       let template = `
                 <custom-comment 
