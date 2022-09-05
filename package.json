@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": ".",
+  "homepage": "blah",
   "scripts": {
     "dev": "vite serve src",
     "build": "vite build src --emptyOutDir",
