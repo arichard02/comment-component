@@ -11,6 +11,9 @@ export default defineConfig({
         "globPatterns": [
             "**/*.html",
           ],
+          build: {
+            outDir: "../dist"
+          }
       },
       devOptions: {
         enabled: true
