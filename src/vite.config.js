@@ -8,7 +8,7 @@ export default defineConfig({
   //     strategies: "injectManifest",
   //     injectManifest: {
   //       globPatterns: ["**/*.html"],
-       
+
   //     },
   //     devOptions: {
   //       enabled: true,
