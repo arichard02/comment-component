@@ -17,6 +17,7 @@ export default class CommentList {
   }
 
   redraw(comments) {
+    console.log("drawing comments", comments);
     // the "redraw" method will CLEAR OUT THE OLD COMMENTS and
     //  redraw with the new comments.
     document.querySelector(".comments").innerHTML = "";
