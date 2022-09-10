@@ -36,29 +36,26 @@ if (workbox) {
   );
 
   const articleHandler = workbox.strategies.networkFirst({
-    cacheName: 'articles-cache',
+    cacheName: "articles-cache",
     plugins: [
       new workbox.expiration.Plugin({
         maxEntries: 50,
-      })
-    ]
+      }),
+    ],
   });
 
-// workbox.routing .registerRoute(/(.*)
-  
-  workbox.routing.registerRoute(/(.*)\.html/, args => {
-    return articleHandler.handle(args).then(response => {
-        if (!response) {
-          return caches.match('pages/offline.html');
-        } else if (response.status === 404) {
-          return caches.match('pages/404.html');
-        }
-        return response;
-      });
-  });
+  // workbox.routing .registerRoute(/(.*)
 
+  workbox.routing.registerRoute(/(.*)\.html/, (args) => {
+    return articleHandler.handle(args).then((response) => {
+      if (!response) {
+        return caches.match("pages/offline.html");
+      } else if (response.status === 404) {
+        return caches.match("pages/404.html");
+      }
+      return response;
+    });
+  });
 } else {
   console.log(`Boo! Workbox didn't load 😬`);
 }
-
-

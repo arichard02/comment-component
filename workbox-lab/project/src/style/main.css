@@ -17,7 +17,7 @@ body {
   align-items: center;
   display: flex;
   flex-direction: column;
-  font-family: 'Roboto','Helvetica','Arial',sans-serif;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   justify-content: space-between;
   margin: 0;
   max-width: 100%;
@@ -34,7 +34,7 @@ ul.navbar {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #2196F3;
+  background-color: #2196f3;
 }
 
 ul.navbar > li > a {
@@ -62,9 +62,9 @@ article {
   flex-wrap: wrap;
   padding: 0 5% 0 5%;
   box-sizing: border-box;
-  -moz-box-sizing:border-box;
-  -webkit-box-sizing:border-box;
-  -ms-box-sizing:border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
 }
 
 footer {
@@ -79,7 +79,7 @@ footer {
 
 a {
   font-weight: 400;
-  color: #2196F3;
+  color: #2196f3;
   text-decoration: underline;
 }
 
@@ -126,8 +126,8 @@ li {
 }
 
 .profile-icon {
-  float:right;
-  padding: 10px 16px
+  float: right;
+  padding: 10px 16px;
 }
 
 .column {
@@ -148,7 +148,7 @@ li {
 
 @media (min-width: 800px) {
   .column {
-     width: calc(50% - 20px);
+    width: calc(50% - 20px);
   }
 
   .left {
@@ -158,7 +158,6 @@ li {
   .right {
     padding-left: 10px;
   }
-
 }
 
 .padded {

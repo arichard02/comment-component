@@ -11,8 +11,6 @@
     <title>Comment Component</title>
   </head>
   <body>
-
-   
     <main>
       <section class="form-container">
         <!-- 
@@ -30,21 +28,23 @@
     <script type="module" src="/js/comment.js"></script>
     <script type="module" src="/js/main.js"></script>
     <!-- <script type="module" src="/js/database-test.js"></script> -->
-    
-    <script>
-    // <!-- Regiters the service worker, which is stored at sw.js -->
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-          .then(registration => {
-            console.log(`Service Worker registered! Scope: ${registration.scope}`);
-          })
-          .catch(err => {
-            console.log(`Service Worker registration failed: ${err}`);
-          });
-      });
-    }
-  </script>
 
+    <script>
+      // <!-- Regiters the service worker, which is stored at sw.js -->
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/sw.js")
+            .then((registration) => {
+              console.log(
+                `Service Worker registered! Scope: ${registration.scope}`
+              );
+            })
+            .catch((err) => {
+              console.log(`Service Worker registration failed: ${err}`);
+            });
+        });
+      }
+    </script>
   </body>
 </html>

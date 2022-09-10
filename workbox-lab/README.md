@@ -12,7 +12,7 @@ All images are CCO
 
 ## More resources
 
-* [PWA training materials](https://developers.google.com/web/ilt/pwa/)
+- [PWA training materials](https://developers.google.com/web/ilt/pwa/)
 
 ## License
 
