@@ -9,45 +9,19 @@ Each comment has:
     3. Comment
     4. Timestamp
 */
-
+import Database from './database.js';
 export default class StateManager {
   // 1. constructor method:
   //      sets up the datastore (this.comments array) and
   //      sets up the subscribers (this.subscribers array)
   constructor() {
-  //   // this week: figuring out how to store and then reload
-  //   // comments using indexDB.
-    // this.comments = [
-    //   {
-    //     name: "Doris Lawrence",
-    //     email: "doris.lawrence@mymail.com",
-    //     comment: "I am the Owner of TinyTot's Toyland!",
-    //     timestamp: "7/30/2022 3:15:13PM",
-    //   },
-    //   {
-    //     name: "James Johnson",
-    //     email: "soliderguy@aol.com",
-    //     comment: "I am a retired army veteran with over 20 years of service! ",
-    //     timestamp: "8/3/2022 3:15:13PM",
-    //   },
-    //   {
-    //     name: "Patricia Morrow",
-    //     email: "schoolteacher@gmail.com",
-    //     comment: "I love being a high school math teacher!",
-    //     timestamp: "8/4/2022 3:15:13PM",
-    //   },
-    //   {
-    //     name: "Micheal Davis",
-    //     email: "micheal@davismail.com",
-    //     comment: "I'm a professional personal chef! ",
-    //     timestamp: "8/4/2022 3:15:13PM",
-    //   },
-    // ];
+ 
 
     // mailing list.
     this.comments = [];
     this.subscribers = [];
-    this.loadDatabase();
+    this.database = new Database();
+    // this.loadDatabase();
   }
 
   //This method does 3 things; loads db(moniqueapp.db)
@@ -72,6 +46,8 @@ export default class StateManager {
       }
     };
 
+
+
   //   // 2. This function fires when the database has been opened.
   //   // This is where we will add new comments to the datastore:
     openRequest.onsuccess = (function (e) {
@@ -83,13 +59,30 @@ export default class StateManager {
     }).bind(this);
   }
 
+  loadComments() {
+    console.log("Loading comments");
+    // 1. create a callback function that will fire after the
+    // favorites loaded:
+    const callbackFunction = function (commentList) {
+        this.notify("comments-loaded", commentList);
+    }; 
+
+    // 2. Invoke the "getAll" method, with the callback function
+    // as an argument. When getAll finishes loading the favorites,
+    // it will fire the callback function with the favorites.
+    this.database.getAll(callbackFunction.bind(this));
+}
+
   // 2. we need a way to update the comments list
   //The form invoked the stateManager's add comment function
   addComment(newComment) {
-    this.comments.push(newComment);
-    //push method of an array appends item to the bottom
-    console.log(this.comments);
-    this.notify("comment-added", this.comments);
+    // this.comments.push(newComment);
+    // //push method of an array appends item to the bottom
+    // console.log(this.comments);
+    this.database.addOrUpdate(newComment, commentList => {
+      this.notify("comment-added", commentList);
+    })
+    
     
   }
 

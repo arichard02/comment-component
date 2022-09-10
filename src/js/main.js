@@ -14,6 +14,8 @@ Goal:
 */
 
 const stateManager = new StateManager();
+console.log("App initializing");
 // const counter = new Counter(stateManager);
 const commentList = new CommentList(stateManager);
 const form = new Form(stateManager);
+stateManager.loadComments();

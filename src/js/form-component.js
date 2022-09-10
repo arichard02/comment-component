@@ -128,7 +128,8 @@ export default class Form {
           name: document.querySelector('#full_name').value,
           email: document.querySelector('#email').value,
           comment: document.querySelector('#textbox').value, 
-          timestamp: dateString
+          timestamp: dateString,
+          id: date.getTime()
       }
       console.log(commentObject);
 
