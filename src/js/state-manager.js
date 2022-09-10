@@ -9,14 +9,12 @@ Each comment has:
     3. Comment
     4. Timestamp
 */
-import Database from './database.js';
+import Database from "./database.js";
 export default class StateManager {
   // 1. constructor method:
   //      sets up the datastore (this.comments array) and
   //      sets up the subscribers (this.subscribers array)
   constructor() {
-
-
     // mailing list.
     this.comments = [];
     this.subscribers = [];
@@ -24,32 +22,29 @@ export default class StateManager {
     // this.loadDatabase();
   }
 
-  
   loadComments() {
     console.log("Loading comments");
     // 1. create a callback function that will fire after the
     // favorites loaded:
     const callbackFunction = function (commentList) {
-        this.notify("comments-loaded", commentList);
-    }; 
+      this.notify("comments-loaded", commentList);
+    };
 
     // 2. Invoke the "getAll" method, with the callback function
     // as an argument. When getAll finishes loading the favorites,
     // it will fire the callback function with the favorites.
     this.database.getAll(callbackFunction.bind(this));
-}
+  }
 
   // 2. we need a way to update the comments list
   //The form invoked the stateManager's add comment function
   addComment(newComment) {
-
-    
     // this.comments.push(newComment);
     // //push method of an array appends item to the bottom
     // console.log(this.comments);
-    this.database.addOrUpdate(newComment, commentList => {
+    this.database.addOrUpdate(newComment, (commentList) => {
       this.notify("comment-added", commentList);
-    })
+    });
   }
 
   // 3. We need a way to tell the other components to redraw

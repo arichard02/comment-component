@@ -125,15 +125,14 @@ export default class Form {
     let dateString = date.toLocaleDateString();
     dateString += " " + date.toLocaleTimeString();
 
-
-      const commentObject = {
-          name: document.querySelector('#full_name').value,
-          email: document.querySelector('#email').value,
-          comment: document.querySelector('#textbox').value, 
-          timestamp: dateString,
-          id: date.getTime()
-      }
-      console.log(commentObject);
+    const commentObject = {
+      name: document.querySelector("#full_name").value,
+      email: document.querySelector("#email").value,
+      comment: document.querySelector("#textbox").value,
+      timestamp: dateString,
+      id: date.getTime(),
+    };
+    console.log(commentObject);
 
     // Your Job: how do you clear out your form!!
     document.querySelector("#full_name").value = "";
